@@ -1,0 +1,15 @@
+driver:
+  name: docker
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  # https://hub.docker.com/_/centos/
+  - name: centos-6
+  - name: centos-7
+
+  # https://hub.docker.com/_/fedora/
+  - name: fedora-20
+  - name: fedora-21
+  - name: fedora-22

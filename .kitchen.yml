@@ -1,0 +1,13 @@
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  # https://github.com/chef/bento
+  - name: centos-6.6
+  - name: centos-7.1
+
+  - name: fedora-21
+  - name: fedora-22
