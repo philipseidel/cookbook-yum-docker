@@ -27,7 +27,7 @@ default['yum-docker']['supported-families'] = {
   }
 }
 
-baseurl_prefix = 'https://yum.dockerproject.org/repo/'
+baseurl_prefix = 'https://yum.dockerproject.org/repo'
 baseurl_suffix = "#{docker_dist}/#{node['platform_version'].to_i}"
 
 default['yum-docker']['repos'].tap do |repo|
@@ -38,7 +38,7 @@ default['yum-docker']['repos'].tap do |repo|
     value['baseurl'] = "#{baseurl_prefix}/main/#{baseurl_suffix}/"
     value['enabled'] = true
     value['gpgcheck'] = true
-    value['gpgkey'] = ''
+    value['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Docker'
   end
 
   repo['docker-testing'].tap do |value|
@@ -48,16 +48,16 @@ default['yum-docker']['repos'].tap do |repo|
     value['baseurl'] = "#{baseurl_prefix}/testing/#{baseurl_suffix}/"
     value['enabled'] = true
     value['gpgcheck'] = true
-    value['gpgkey'] = ''
+    value['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Docker'
   end
 
   repo['docker-experimental'].tap do |value|
     value['managed'] = false
     value['repositoryid'] = 'docker-experimental-repo'
     value['description'] = 'Docker experimental Repository'
-    value['baseurl'] = "#{baseurl_prefix}/testing/#{baseurl_suffix}/"
+    value['baseurl'] = "#{baseurl_prefix}/experimental/#{baseurl_suffix}/"
     value['enabled'] = true
     value['gpgcheck'] = true
-    value['gpgkey'] = ''
+    value['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Docker'
   end
 end

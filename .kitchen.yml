@@ -10,7 +10,7 @@ platforms:
   - name: centos-7.1
 
   - name: fedora-21
-  - name: fedora-22
+  # - name: fedora-22 # waiting for DNF support
 
 suites:
   - name: default
@@ -41,11 +41,15 @@ suites:
       - recipe[test::yum_utils]
       - recipe[yum-docker]
       - recipe[test::install_docker]
-    yum-docker:
-      repos:
-        docker-main:
-          managed: false
-        docker-testing:
-          managed: false
-        docker-experimental:
-          managed: true
+    excludes:
+      - centos-7.1 # test fails as it cannot resolve docker-engine-selinux
+      - fedora-21  # test fails as it cannot resolve docker-engine-selinux
+    attributes:
+      yum-docker:
+        repos:
+          docker-main:
+            managed: false
+          docker-testing:
+            managed: false
+          docker-experimental:
+            managed: true

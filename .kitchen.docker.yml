@@ -10,9 +10,9 @@ platforms:
   - name: centos-7
 
   # https://hub.docker.com/_/fedora/
+  # https://github.com/portertech/kitchen-docker/issues/147
   - name: fedora-20
   - name: fedora-21
-  - name: fedora-22
 
 suites:
   - name: default
@@ -43,11 +43,12 @@ suites:
       - recipe[test::yum_utils]
       - recipe[yum-docker]
       - recipe[test::install_docker]
-    yum-docker:
-      repos:
-        docker-main:
-          managed: false
-        docker-testing:
-          managed: false
-        docker-experimental:
-          managed: true
+    attributes:
+      yum-docker:
+        repos:
+          docker-main:
+            managed: false
+          docker-testing:
+            managed: false
+          docker-experimental:
+            managed: true

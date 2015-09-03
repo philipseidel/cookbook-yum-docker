@@ -3,6 +3,15 @@
 # Recipe:: default
 #
 
+# install GPG key
+cookbook_file '/etc/pki/rpm-gpg/RPM-GPG-KEY-Docker' do
+  source 'RPM-GPG-KEY-Docker'
+  mode '644'
+  owner 'root'
+  group 'root'
+end
+
+# install repos
 node['yum-docker']['repos'].each do |repo, value|
   yum_repository repo do
     # define all attributes even though we are not using them all so that the
