@@ -12,3 +12,8 @@ issues_url 'https://github.com/st-isidore-de-seville/cookbook-yum-docker/issues'
 recipe 'yum-docker::default', 'Installs/Configures yum Docker Vendor-Specific Repository'
 
 depends 'yum', '~> 3.6'
+
+supports 'redhat'
+supports 'centos'
+supports 'oracle'
+supports 'fedora'
