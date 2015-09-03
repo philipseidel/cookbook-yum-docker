@@ -7,6 +7,17 @@
 #  supported by this cookbook and can be used to override attributes in this
 #  cookbook.
 
+# check is platform is supported
+platform_family = node['platform_family']
+platform = node['platform']
+platform_version = node['platform_version']
+
+fail("#{platform_family}/#{platform}/#{platform_version} is not supported by the default recipe") \
+  unless node['yum-docker']['supported-families'][platform_family]
+         .select { |_version, is_included| is_included }
+         .keys
+         .include?(platform_version.to_i.to_s)
+
 # install GPG key
 cookbook_file '/etc/pki/rpm-gpg/RPM-GPG-KEY-Docker' do
   source 'RPM-GPG-KEY-Docker'
