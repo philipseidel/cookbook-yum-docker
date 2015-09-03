@@ -1,0 +1,58 @@
+driver:
+  name: docker
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  # https://hub.docker.com/_/centos/
+  - name: centos-6
+  - name: centos-7
+
+  # https://hub.docker.com/_/fedora/
+  # https://github.com/portertech/kitchen-docker/issues/147
+  # - name: fedora-20
+  # - name: fedora-21
+  # - name: fedora-22 # waiting for DNF support
+
+suites:
+  - name: default
+    run_list:
+      - recipe[test::yum_utils]
+      - recipe[yum-docker]
+      - recipe[test::install_docker]
+
+  - name: testing
+    run_list:
+      - recipe[test::yum_utils]
+      - recipe[yum-docker]
+      - recipe[test::install_docker]
+    excludes:
+      - centos-6 #repo does not exist
+    attributes:
+      yum-docker:
+        repos:
+          docker-main:
+            managed: false
+          docker-testing:
+            managed: true
+          docker-experimental:
+            managed: false
+
+  - name: experimental
+    run_list:
+      - recipe[test::yum_utils]
+      - recipe[yum-docker]
+      - recipe[test::install_docker]
+    excludes:
+      - centos-7  # test fails as it cannot resolve docker-engine-selinux
+      - fedora-21 # test fails as it cannot resolve docker-engine-selinux
+    attributes:
+      yum-docker:
+        repos:
+          docker-main:
+            managed: false
+          docker-testing:
+            managed: false
+          docker-experimental:
+            managed: true
