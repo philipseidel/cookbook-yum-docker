@@ -134,6 +134,24 @@ describe 'yum-docker' do
     end
   end
 
+  context 'when on an supported platform' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'redhat', version: '7.0')
+        .converge(described_recipe)
+    end
+
+    it 'should create the Docker GPG Key' do
+      expect(chef_run).to \
+        create_cookbook_file('file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Docker')
+        .with(
+          source: 'RPM-GPG-KEY-Docker',
+          mode: '644',
+          owner: 'root',
+          group: 'root'
+        )
+    end
+  end
+
   describe 'when on an unsupported platform' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'redhat', version: '7.0') do |node|
