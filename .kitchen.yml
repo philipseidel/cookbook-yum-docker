@@ -15,11 +15,15 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[test::yum_utils]
       - recipe[yum-docker]
+      - recipe[test::install_docker]
 
   - name: testing
     run_list:
+      - recipe[test::yum_utils]
       - recipe[yum-docker]
+      - recipe[test::install_docker]
     excludes:
       - centos-6.6 # repo does not exist
     attributes:
@@ -34,7 +38,9 @@ suites:
 
   - name: experimental
     run_list:
+      - recipe[test::yum_utils]
       - recipe[yum-docker]
+      - recipe[test::install_docker]
     yum-docker:
       repos:
         docker-main:
