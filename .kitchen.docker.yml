@@ -13,3 +13,35 @@ platforms:
   - name: fedora-20
   - name: fedora-21
   - name: fedora-22
+
+suites:
+  - name: default
+    run_list:
+      - recipe[yum-docker]
+
+  - name: testing
+    run_list:
+      - recipe[yum-docker]
+    excludes:
+      - centos-6 #repo does not exist
+    attributes:
+      yum-docker:
+        repos:
+          docker-main:
+            managed: false
+          docker-testing:
+            managed: true
+          docker-experimental:
+            managed: false
+
+  - name: experimental
+    run_list:
+      - recipe[yum-docker]
+    yum-docker:
+      repos:
+        docker-main:
+          managed: false
+        docker-testing:
+          managed: false
+        docker-experimental:
+          managed: true
