@@ -2,6 +2,10 @@
 # Cookbook Name:: yum-docker
 # Recipe:: default
 #
+#  Installs & configures the yum Docker repostories.  Any attribute supported by
+#  the [yum cookbook](https://github.com/chef-cookbooks/yum#parameters) is
+#  supported by this cookbook and can be used to override attributes in this
+#  cookbook.
 
 # install GPG key
 cookbook_file '/etc/pki/rpm-gpg/RPM-GPG-KEY-Docker' do

@@ -9,6 +9,6 @@ version '0.1.0'
 source_url 'https://github.com/st-isidore-de-seville/cookbook-yum-docker'
 issues_url 'https://github.com/st-isidore-de-seville/cookbook-yum-docker/issues'
 
-recipe 'yum-nginx::default', 'Installs/Configures yum Docker Vendor-Specific Repository'
+recipe 'yum-docker::default', 'Installs/Configures yum Docker Vendor-Specific Repository'
 
 depends 'yum', '~> 3.6'

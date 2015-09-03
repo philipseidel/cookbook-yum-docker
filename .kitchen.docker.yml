@@ -11,8 +11,9 @@ platforms:
 
   # https://hub.docker.com/_/fedora/
   # https://github.com/portertech/kitchen-docker/issues/147
-  - name: fedora-20
-  - name: fedora-21
+  # - name: fedora-20
+  # - name: fedora-21
+  # - name: fedora-22 # waiting for DNF support
 
 suites:
   - name: default
@@ -43,6 +44,9 @@ suites:
       - recipe[test::yum_utils]
       - recipe[yum-docker]
       - recipe[test::install_docker]
+    excludes:
+      - centos-7  # test fails as it cannot resolve docker-engine-selinux
+      - fedora-21 # test fails as it cannot resolve docker-engine-selinux
     attributes:
       yum-docker:
         repos:
