@@ -64,7 +64,8 @@ describe 'yum-docker' do
           it 'should create the docker-testing repo with default attribs' do
             expect(chef_run).to create_yum_repository('docker-testing').with(
               description: 'Docker testing Repository',
-              baseurl: "https://yum.dockerproject.org/repo/testing/#{v[:docker_dist]}/#{version.to_i}",
+              baseurl:
+              "https://yum.dockerproject.org/repo/testing/#{v[:docker_dist]}/#{version.to_i}",
               enabled: true,
               gpgcheck: true,
               gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Docker'
@@ -96,7 +97,8 @@ describe 'yum-docker' do
           it 'should create the docker-experimental repo with default attribs' do
             expect(chef_run).to create_yum_repository('docker-experimental').with(
               description: 'Docker experimental Repository',
-              baseurl: "https://yum.dockerproject.org/repo/experimental/#{v[:docker_dist]}/#{version.to_i}",
+              baseurl:
+              "https://yum.dockerproject.org/repo/experimental/#{v[:docker_dist]}/#{version.to_i}",
               enabled: true,
               gpgcheck: true,
               gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Docker'
