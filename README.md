@@ -27,6 +27,40 @@ Per https://get.docker.com/, there are currently three repositories for Docker:
 main, testing & experimental.  Main is the stable repository.  Testing is for
 test builds (ie. release candidates).  Experimental is for experimental builds.
 
+- `['yum-docker']['supported-families']`
+  - _Type:_ Hash
+
+  - _Description:_
+
+    Platform support for this cookbook and the Docker repository.  Designed
+    to be a private attribute however it can be overridden in the case Docker
+    supports additional versions and this cookbook has not been updated yet.
+
+    This check was implemented as a result of the repo could be successfully
+    installed yet not be valid for a given platform and a Docker package could
+    be successfully installed as a result of it being available natively on the
+    platform it which it was run which results in a false positive for the
+    consumer of the cookbook.
+
+    The hash key is the platform family of the OS.  The secondary hash key is
+    the major version of the OS.  If the hash value evaluates to true, the
+    platform family/version is considered supported.
+    
+  - _Default:_
+
+    ```ruby
+    {
+      fedora: {
+        '20' => true,
+        '21' => true,
+        '22' => true
+      },
+      rhel: {
+        '6' => true,
+        '7' => true
+      }
+    }
+    ```
 - Docker Main Repo
   - `['yum-docker']['repos']['docker-main-repo']['managed']`
     - _Type:_ Boolean

@@ -15,6 +15,20 @@ elsif platform_family?('fedora')
   docker_dist = 'fedora'
 end
 
+# Platform support for this cookbook and the Docker repository.  Designed
+# to be a private attribute however it can be overridden in the case Docker
+# supports additional versions and this cookbook has not been updated yet.
+#
+# This check was implemented as a result of the repo could be successfully
+# installed yet not be valid for a given platform and a Docker package could
+# be successfully installed as a result of it being available natively on the
+# platform it which it was run which results in a false positive for the
+# consumer of the cookbook.
+#
+# The hash key is the platform family of the OS.  The secondary hash key is
+# the major version of the OS.  If the hash value evaluates to true, the
+# platform family/version is considered supported.
+
 default['yum-docker']['supported-families'] = {
   fedora: {
     '20' => true,
