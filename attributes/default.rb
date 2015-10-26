@@ -37,12 +37,18 @@ default['yum-docker']['supported-families'] = {
   },
   rhel: {
     '6' => true,
-    '7' => true
+    '7' => true,
+    '2015' => true
   }
 }
 
 baseurl_prefix = 'https://yum.dockerproject.org/repo'
-baseurl_suffix = "#{docker_dist}/#{node['platform_version'].to_i}"
+
+if platform?('amazon')
+  baseurl_suffix = "#{docker_dist}/6"
+else
+  baseurl_suffix = "#{docker_dist}/#{node['platform_version'].to_i}"
+end
 
 default['yum-docker']['repos'].tap do |repo|
   repo['docker-main'].tap do |value|
