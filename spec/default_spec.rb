@@ -51,7 +51,8 @@ describe 'yum-docker' do
           it 'should create the docker-main repo with default attribs' do
             expect(chef_run).to create_yum_repository('docker-main').with(
               description: 'Docker main Repository',
-              baseurl: "https://yum.dockerproject.org/repo/main/#{v['docker_dist']}/#{repo_version}",
+              baseurl:
+              "https://yum.dockerproject.org/repo/main/#{v['docker_dist']}/#{repo_version}",
               enabled: true,
               gpgcheck: true,
               gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Docker'
