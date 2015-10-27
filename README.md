@@ -45,7 +45,7 @@ test builds (ie. release candidates).  Experimental is for experimental builds.
     The hash key is the platform family of the OS.  The secondary hash key is
     the major version of the OS.  If the hash value evaluates to true, the
     platform family/version is considered supported.
-    
+
   - _Default:_
 
     ```ruby
@@ -57,7 +57,8 @@ test builds (ie. release candidates).  Experimental is for experimental builds.
       },
       rhel: {
         '6' => true,
-        '7' => true
+        '7' => true,
+        '2015' => true # Amazon Linux
       }
     }
     ```

@@ -1,27 +1,46 @@
 require 'spec_helper'
 
 platform_test_matrix = {
-  oracle: {
-    docker_dist: 'oraclelinux',
-    versions: ['6.5', '7.0']
+  'oracle' => {
+    'docker_dist' => 'oraclelinux',
+    'versions' => {
+      '6.5' => '6',
+      '7.0' => '7'
+    }
   },
-  redhat: {
-    docker_dist: 'centos',
-    versions: ['6.5', '7.0']
+  'redhat' => {
+    'docker_dist' => 'centos',
+    'versions' => {
+      '6.5' => '6',
+      '7.0' => '7'
+    }
   },
-  centos: {
-    docker_dist: 'centos',
-    versions: ['6.5', '7.0']
+  'centos' => {
+    'docker_dist' => 'centos',
+    'versions' => {
+      '6.5' => '6',
+      '7.0' => '7'
+    }
   },
-  fedora: {
-    docker_dist: 'fedora',
-    versions: %w(20 21 22)
+  'fedora' => {
+    'docker_dist' => 'fedora',
+    'versions' => {
+      '20' => '20',
+      '21' => '21',
+      '22' => '22'
+    }
+  },
+  'amazon' => {
+    'docker_dist' => 'centos',
+    'versions' => {
+      '2015.03' => '6'
+    }
   }
 }
 
 describe 'yum-docker' do
   platform_test_matrix.each do |platform, v|
-    v[:versions].each do |version|
+    v['versions'].each do |version, repo_version|
       describe "when on #{platform} #{version}" do
         describe 'by default' do
           let(:chef_run) do
@@ -32,7 +51,7 @@ describe 'yum-docker' do
           it 'should create the docker-main repo with default attribs' do
             expect(chef_run).to create_yum_repository('docker-main').with(
               description: 'Docker main Repository',
-              baseurl: "https://yum.dockerproject.org/repo/main/#{v[:docker_dist]}/#{version.to_i}",
+              baseurl: "https://yum.dockerproject.org/repo/main/#{v['docker_dist']}/#{repo_version}",
               enabled: true,
               gpgcheck: true,
               gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Docker'
@@ -65,7 +84,7 @@ describe 'yum-docker' do
             expect(chef_run).to create_yum_repository('docker-testing').with(
               description: 'Docker testing Repository',
               baseurl:
-              "https://yum.dockerproject.org/repo/testing/#{v[:docker_dist]}/#{version.to_i}",
+              "https://yum.dockerproject.org/repo/testing/#{v['docker_dist']}/#{repo_version}",
               enabled: true,
               gpgcheck: true,
               gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Docker'
@@ -98,7 +117,7 @@ describe 'yum-docker' do
             expect(chef_run).to create_yum_repository('docker-experimental').with(
               description: 'Docker experimental Repository',
               baseurl:
-              "https://yum.dockerproject.org/repo/experimental/#{v[:docker_dist]}/#{version.to_i}",
+              "https://yum.dockerproject.org/repo/experimental/#{v['docker_dist']}/#{repo_version}",
               enabled: true,
               gpgcheck: true,
               gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Docker'

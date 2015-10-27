@@ -4,6 +4,11 @@ yum-docker CHANGELOG
 This file is used to list changes made in each version of the yum-docker
 cookbook.
 
+0.3.0
+-----
+- Sean OMeara (sean@chef.io)
+  - add Amazon Linux support
+
 0.2.0
 -----
 - Sean OMeara (sean@chef.io)
