@@ -6,7 +6,7 @@ provisioner:
 
 platforms:
   # https://github.com/chef/bento
-  - name: centos-6.6
+  - name: centos-6.7
   - name: centos-7.1
 
   - name: fedora-21
@@ -25,7 +25,7 @@ suites:
       - recipe[yum-docker]
       - recipe[test::install_docker]
     excludes:
-      - centos-6.6 # repo does not exist
+      - centos-6.7 # repo does not exist
     attributes:
       yum-docker:
         repos:
@@ -41,9 +41,6 @@ suites:
       - recipe[test::yum_utils]
       - recipe[yum-docker]
       - recipe[test::install_docker]
-    excludes:
-      - centos-7.1 # test fails as it cannot resolve docker-engine-selinux
-      - fedora-21  # test fails as it cannot resolve docker-engine-selinux
     attributes:
       yum-docker:
         repos:

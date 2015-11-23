@@ -9,7 +9,7 @@ Vagrant.configure('2') do |config|
   # these values are reset to Vagrant defaults as the base Vagrant box needed
   #  more memory and CPU for building Gecode
   config.vm.provider 'virtualbox' do |v|
-    v.memory = 512
+    v.memory = 1024
     v.cpus = 1
   end
 
