@@ -11,6 +11,7 @@ cookbook.
     behavior was not passing back false values because of the condition and then
     subsequently the value for the yum cookbook may have been defaulting to true
     values.
+  - fix Chef 11 issues
 
 0.3.0
 -----
