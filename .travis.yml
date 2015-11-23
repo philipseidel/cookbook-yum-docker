@@ -1,8 +1,6 @@
 # http://www.invalidchecksum.net/2015/08/travis-ci-gce-docker-test-kitchen.html
 language: ruby
 
-bundler_args: --without local-integration
-
 sudo: required
 
 services:

@@ -1,6 +1,6 @@
 script = <<SCRIPT
 # Install Needed Gems
-su -c "cd /vagrant; gem install bundler; bundle install --without ci-integration" - vagrant
+su -c "cd /vagrant; gem install bundler; bundle install" - vagrant
 SCRIPT
 
 Vagrant.configure('2') do |config|

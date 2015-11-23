@@ -4,7 +4,7 @@ maintainer_email 'st.isidore.de.seville@gmail.com'
 license 'MIT'
 description 'Installs/Configures yum Docker Vendor-Specific Repository'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '0.3.0'
+version '0.4.0'
 
 source_url 'https://github.com/st-isidore-de-seville/cookbook-yum-docker'
 issues_url 'https://github.com/st-isidore-de-seville/cookbook-yum-docker/issues'
